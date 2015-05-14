@@ -513,7 +513,7 @@ public class Buscar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel59.setText("Fecha de creaciÃ³n:");
+        jLabel59.setText("Fecha de creación:");
 
         jLabel73.setText("Nombre :");
 
@@ -790,7 +790,7 @@ public class Buscar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel79.setText("Fecha de creaciÃ³n:");
+        jLabel79.setText("Fecha de creación:");
 
         jLabel80.setText("Nombre :");
 
