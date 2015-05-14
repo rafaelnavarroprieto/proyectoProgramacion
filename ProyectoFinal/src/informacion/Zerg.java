@@ -114,17 +114,6 @@ public class Zerg extends Unidad implements Serializable {
         }
         return 0;
     }
-
-    /**
-     * Método toString de la clase
-     *
-     * @return devuelve un mensaje con la información de la unidad
-     */
-    @Override
-    public String toString() {
-        return "" + super.toString() + " Zerg{" + "regeneracionDeVida=" + regeneracionDeVida + '}';
-    }
-
     /**
      * Método que prueba la comunicación con el objeto
      *

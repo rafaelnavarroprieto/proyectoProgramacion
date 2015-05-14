@@ -27,7 +27,7 @@ public abstract class Unidad implements Creacionable, Serializable {
     /**
      * Método que valida el nombre de las unidades
      * @param nombre nombre para validar
-     * @return devuelve true si el nombre cumple el patron o false si el nombre no cumple el patrón
+     * @return devuelve true si el nombre cumple el patrón o false si el nombre no cumple el patrón
      */
      static private boolean validarNombre(String nombre) {
         return patron.matcher(nombre).matches();
@@ -45,7 +45,7 @@ public abstract class Unidad implements Creacionable, Serializable {
      */
     private int derrotas = 0;
     /**
-     * Vida de laa unidad
+     * Vida de la unidad
      */
     protected float vida;
     /**
@@ -76,25 +76,25 @@ public abstract class Unidad implements Creacionable, Serializable {
     }
 
     /**
-     * MÃ©todo get de las victorioas de la unidad
+     * Método get de las victorioas de la unidad
      *
-     * @return devuelve el nÃºmero de victorias de la unidad
+     * @return devuelve el número de victorias de la unidad
      */
     public int getVictorias() {
         return victorias;
     }
 
     /**
-     * MÃ©todo get de las derrotas de la unidad
+     * Método get de las derrotas de la unidad
      *
-     * @return devuelve el nÃºmero de derrotas de la unidad
+     * @return devuelve el número de derrotas de la unidad
      */
     public int getDerrotas() {
         return derrotas;
     }
 
     /**
-     * MÃ©todo get de la vida de la unidad
+     * Método get de la vida de la unidad
      *
      * @return devuelve la vida de la unidad
      */
@@ -103,7 +103,7 @@ public abstract class Unidad implements Creacionable, Serializable {
     }
 
     /**
-     * MÃ©todo get del ataque 
+     * Método get del ataque 
      *
      * @return devuelve el ataque de la unidad
      */
@@ -112,7 +112,7 @@ public abstract class Unidad implements Creacionable, Serializable {
     }
 
     /**
-     * MÃ©todo get del tipo 
+     * Método get del tipo 
      *
      * @return devuelve el tipo de la unidad
      */
@@ -121,29 +121,29 @@ public abstract class Unidad implements Creacionable, Serializable {
     }
 
     /**
-     * MÃ©todo get del campo aciertos
+     * Método get del campo aciertos
      *
-     * @return devuelve el nÃºmero de aciertos consecutivos
+     * @return devuelve el número de aciertos consecutivos
      */
     public int getAciertos() {
         return aciertos;
     }
 
     /**
-     * MÃ©todo get de la fecha de creaciÃ³n
+     * Método get de la fecha de creación
      *
-     * @return devuelve la fecha de creaciÃ³n
+     * @return devuelve la fecha de creación
      */
     public String getFechaDeCreacion() {
         return fechaDeCreacion;
     }
 
     /**
-     * MÃ©todo set del campo nombre
+     * Método set del campo nombre
      *
      * @param nombre nombre para asignar
      * @throws NombreNoValidoException excepción que salta cuando el nombre no
-     * es válido segun el patron especifico
+     * es valido segun el patron especifico
      *
      */
     public void setNombre(String nombre) throws NombreNoValidoException {
@@ -249,21 +249,10 @@ public abstract class Unidad implements Creacionable, Serializable {
     public abstract float calcularAtaque(Tipo tipo);
     /**
      * Método que interactua con las unidades
-     * @return devuelve un nÃºmero indicando el daño que realiza
+     * @return devuelve un número indicando el daño que realiza
      */
     public abstract float test();
-    /**
-     * Método toString que muestra el estado de las unidades
-     * @return devuelve un mensaje con el estado de cada campo de la unidad
-     */
-    @Override
-    public String toString() {
-        return "Unidad{" + "nombre=" + nombre + "\n victorias=" + victorias + ""
-                + "\n derrotas=" + derrotas + "\n vida=" + vida + "\n ataque=" + ataque + ""
-                + "\n tipo=" + tipo + "\n aciertos=" + aciertos + " fechaDeCreacion=" + fechaDeCreacion + '}';
-    }
-
-    @Override
+   @Override
     public int hashCode() {
         int hash = 5;
         hash = 23 * hash + Objects.hashCode(this.nombre);
@@ -277,9 +266,6 @@ public abstract class Unidad implements Creacionable, Serializable {
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
             return false;
         }
         final Unidad other = (Unidad) obj;

@@ -9,6 +9,7 @@ import informacion.Intermediaria;
 import informacion.*;
 import informacion.UnidadNoExistenteException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -57,6 +58,9 @@ public class Buscar extends javax.swing.JDialog {
         ligera.setEnabled(false);
         mediana.setEnabled(false);
         pesada.setEnabled(false);
+        //marcamos opciones por defecto
+        protos1.setSelected(true);
+        ligera2.setSelected(true);
         //reinicia valores por defecto de las diferentes pestañas
         reiniciarValoresRaza();
         reiniciarValoresTipo();
@@ -65,6 +69,8 @@ public class Buscar extends javax.swing.JDialog {
         comprobarBotones();
         ventanaPrincipal = principal;
         setLocationRelativeTo(null);
+        imagen1.setVisible(true);//visualizamos la imagen
+        modificarImagenRaza(comprobarTipo());
 
     }
 
@@ -174,9 +180,12 @@ public class Buscar extends javax.swing.JDialog {
         siguiente2 = new javax.swing.JButton();
         probarUnidad2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
+        imagen1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(610, 500));
+        setMinimumSize(new java.awt.Dimension(610, 500));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -295,6 +304,11 @@ public class Buscar extends javax.swing.JDialog {
         limpiar.setText("Limpiar");
 
         buscar.setText("Buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
 
         cancelar.setText("Salir");
         cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -499,13 +513,14 @@ public class Buscar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel59.setText("Fecha de creación:");
+        jLabel59.setText("Fecha de creaciÃ³n:");
 
         jLabel73.setText("Nombre :");
 
         jPanel35.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Raza", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Starcraft", 0, 10), new java.awt.Color(0, 0, 255))); // NOI18N
 
         raza.add(protos1);
+        protos1.setSelected(true);
         protos1.setText("Protos");
 
         raza.add(zerg1);
@@ -742,6 +757,7 @@ public class Buscar extends javax.swing.JDialog {
         pesada2.setText("Pesada");
 
         tipo.add(ligera2);
+        ligera2.setSelected(true);
         ligera2.setText("Ligera");
 
         tipo.add(mediana2);
@@ -754,10 +770,13 @@ public class Buscar extends javax.swing.JDialog {
             .addGroup(jPanel30Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ligera2)
-                    .addComponent(mediana2)
-                    .addComponent(pesada2))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(jPanel30Layout.createSequentialGroup()
+                        .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(mediana2)
+                            .addComponent(pesada2))
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(ligera2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -771,7 +790,7 @@ public class Buscar extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jLabel79.setText("Fecha de creación:");
+        jLabel79.setText("Fecha de creaciÃ³n:");
 
         jLabel80.setText("Nombre :");
 
@@ -1005,8 +1024,14 @@ public class Buscar extends javax.swing.JDialog {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 650, 230));
 
+        imagen1.setBackground(new java.awt.Color(102, 51, 255));
+        imagen1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 102)));
+        imagen1.setMaximumSize(new java.awt.Dimension(150, 213));
+        imagen1.setMinimumSize(new java.awt.Dimension(150, 213));
+        getContentPane().add(imagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 150, 200));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/otros/FondoFinal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 680, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1014,12 +1039,14 @@ public class Buscar extends javax.swing.JDialog {
     private void anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorActionPerformed
         mostrarUnidad(--indiceTotal);
         comprobarBotones();
+        modificarImagenRaza(comprobarTipo());
 
     }//GEN-LAST:event_anteriorActionPerformed
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
         mostrarUnidad(++indiceTotal);
         comprobarBotones();
+        modificarImagenRaza(comprobarTipo());
      }//GEN-LAST:event_siguienteActionPerformed
 
     private void listaCompletaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_listaCompletaStateChanged
@@ -1030,6 +1057,14 @@ public class Buscar extends javax.swing.JDialog {
         reiniciarValoresRaza();//reinicio de elementos
         indiceTipo = 0;
         reiniciarValoresTipo();
+        if (jPanel1.isShowing()) {
+            modificarImagenRaza(comprobarTipo());
+            imagen1.setVisible(true);
+        } else {
+            imagen1.setIcon(new ImageIcon(""));
+            imagen1.setVisible(false);
+        }
+
 
     }//GEN-LAST:event_listaCompletaStateChanged
 
@@ -1049,6 +1084,7 @@ public class Buscar extends javax.swing.JDialog {
     private void anterior1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anterior1ActionPerformed
         mostrarRaza(--indiceRaza);
         comprobarBotonesRaza();
+        modificarImagenTipo(comprobarRaza());
     }//GEN-LAST:event_anterior1ActionPerformed
 
     private void cancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar1ActionPerformed
@@ -1058,6 +1094,7 @@ public class Buscar extends javax.swing.JDialog {
     private void siguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguiente1ActionPerformed
         mostrarRaza(++indiceRaza);
         comprobarBotonesRaza();
+        modificarImagenTipo(comprobarRaza());
     }//GEN-LAST:event_siguiente1ActionPerformed
 
     private void probarUnidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probarUnidad1ActionPerformed
@@ -1073,6 +1110,7 @@ public class Buscar extends javax.swing.JDialog {
     private void anterior2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anterior2ActionPerformed
         mostrarTipo(--indiceTipo);
         comprobarBotonesTipo();
+        modificarImagenRaza(comprobarTipo());
     }//GEN-LAST:event_anterior2ActionPerformed
 
     private void cancelar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar2ActionPerformed
@@ -1082,6 +1120,7 @@ public class Buscar extends javax.swing.JDialog {
     private void siguiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguiente2ActionPerformed
         mostrarTipo(++indiceTipo);
         comprobarBotonesTipo();
+        modificarImagenRaza(comprobarTipo());
     }//GEN-LAST:event_siguiente2ActionPerformed
 
     private void probarUnidad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probarUnidad2ActionPerformed
@@ -1098,24 +1137,37 @@ public class Buscar extends javax.swing.JDialog {
     private void buscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar1ActionPerformed
         mostrarRaza(indiceRaza);
         comprobarBotonesRaza();
+        modificarImagenRaza(comprobarTipo());
     }//GEN-LAST:event_buscar1ActionPerformed
 
     private void limpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiar1ActionPerformed
         reiniciarValoresRaza();
+        imagen1.setIcon(new ImageIcon(""));
+        imagen1.setVisible(false);
+
+
     }//GEN-LAST:event_limpiar1ActionPerformed
 
     private void buscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar2ActionPerformed
         mostrarTipo(indiceTipo);
         comprobarBotonesTipo();
+        modificarImagenRaza(comprobarTipo());
     }//GEN-LAST:event_buscar2ActionPerformed
 
     private void limpiar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiar2ActionPerformed
         reiniciarValoresTipo();
+        imagen1.setIcon(new ImageIcon(""));
+        imagen1.setVisible(false);
+
     }//GEN-LAST:event_limpiar2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         cerrar();
     }//GEN-LAST:event_formWindowClosing
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarActionPerformed
     /**
      * Array que contiene las unidades segun la busqueda solicitada
      */
@@ -1146,6 +1198,7 @@ public class Buscar extends javax.swing.JDialog {
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel fecha1;
     private javax.swing.JLabel fecha2;
+    private javax.swing.JLabel imagen1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
@@ -1239,7 +1292,7 @@ public class Buscar extends javax.swing.JDialog {
                 escudo.setText("0"); // si no es protos escudo es 0
             }
 
-            //Datos bÃ¡sicos
+            //Datos básicos
             victorias.setText(Integer.toString(Intermediaria.lista.getUnidadIndice(indiceTotal).getVictorias()));
             derrotas.setText(Integer.toString(Intermediaria.lista.getUnidadIndice(indiceTotal).getDerrotas()));
             vida.setText(Float.toString(Intermediaria.lista.getUnidadIndice(indiceTotal).getVida()));
@@ -1344,7 +1397,7 @@ public class Buscar extends javax.swing.JDialog {
             protos1.setEnabled(false);
             terran1.setEnabled(false);
             zerg1.setEnabled(false);
-
+            imagen1.setVisible(true);
         } catch (ListaRazaVaciaExcepcion ex) {
             JOptionPane.showMessageDialog(contentPanel, ex.getMessage(), "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
             reiniciarValoresRaza(); //Valores por defecto
@@ -1416,6 +1469,7 @@ public class Buscar extends javax.swing.JDialog {
         limpiar2.setEnabled(false);
         buscar2.setEnabled(true);
         ligera2.setEnabled(true);
+        ligera2.setSelected(true);
         mediana2.setEnabled(true);
         pesada2.setEnabled(true);
         protos2.setEnabled(false);
@@ -1441,6 +1495,7 @@ public class Buscar extends javax.swing.JDialog {
         limpiar1.setEnabled(false);
         buscar1.setEnabled(true);
         protos1.setEnabled(true);
+        protos1.setSelected(true);
         terran1.setEnabled(true);
         zerg1.setEnabled(true);
         ligera1.setEnabled(false);
@@ -1451,7 +1506,7 @@ public class Buscar extends javax.swing.JDialog {
     /**
      * Muestra la unidad por tipo
      *
-     * @param indiceTipo posición de la unidad en la lista
+     * @param indiceTipo posiciï¿½n de la unidad en la lista
      */
     private void mostrarTipo(int indiceTipo) {
         try {
@@ -1501,7 +1556,7 @@ public class Buscar extends javax.swing.JDialog {
             ligera2.setEnabled(false);
             mediana2.setEnabled(false);
             pesada2.setEnabled(false);
-
+            imagen1.setVisible(true);
         } catch (ListaTipoVaciaExcepcion ex) {
             JOptionPane.showMessageDialog(contentPanel, ex.getMessage(), "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
             reiniciarValoresTipo();//Valores por defecto
@@ -1529,5 +1584,186 @@ public class Buscar extends javax.swing.JDialog {
     private void cerrar() {
         ventanaPrincipal.setVisible(true);
         dispose();
+    }
+
+    /**
+     * Compruena el radio seleccionado con respecto al tipo de unidad
+     *
+     * @return devuelve Tipo.LIGERA si el radio seleccionado es
+     * ligera,Tipo.MEDIANA si el radio seleccionado es MEDIANA o Tipo.PESADA si
+     * el radio seleccionado es pesada , si no es ninguno devuele null
+     */
+    private Tipo comprobarTipo() {
+        if (ligera.isSelected() || ligera1.isSelected() || ligera2.isSelected()) {
+            return Tipo.LIGERA;
+        } else if (mediana.isSelected() || mediana1.isSelected() || mediana2.isSelected()) {
+            return Tipo.MEDIANA;
+        } else if (pesada.isSelected() || pesada1.isSelected() || pesada2.isSelected()) {
+            return Tipo.PESADA;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Compruena el radio seleccionado con respecto a la raza de la unidad
+     *
+     * @return devuelve Raza.PROTOS si el radio seleccionado es
+     * protos,Tipo.TERRAN si el radio seleccionado es terran o Tipo.ZERG si el
+     * radio seleccionado es zerg, si no es ninguno devuelve null
+     */
+    private Raza comprobarRaza() {
+        if (protos.isSelected() || protos1.isSelected() || protos2.isSelected()) {
+            return Raza.PROTOS;
+        } else if (terran.isSelected() || terran1.isSelected() || terran2.isSelected()) {
+            return Raza.TERRAN;
+        } else if (zerg.isSelected() || zerg1.isSelected() || zerg2.isSelected()) {
+
+            return Raza.ZERG;
+        } else {
+            return null;
+        }
+
+    }
+
+    /**
+     * Modifica la imagen segun la raza seleccionada
+     *
+     * @param comprobarRaza raza seleccionada
+     */
+    private void modificarImagenTipo(Raza raza) {
+        switch (raza) {
+            case PROTOS:
+                switch (comprobarTipo()) {
+
+                    case LIGERA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\zealot.png"));
+                        break;
+                    case MEDIANA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\inmortal.png"));
+
+                        break;
+                    case PESADA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\coloso.png"));
+
+                        break;
+                    default:
+                        imagen1.setIcon(new ImageIcon(""));
+                        break;
+                }
+                break;
+            case TERRAN:
+                switch (comprobarTipo()) {
+                    case LIGERA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\marine.png"));
+                        break;
+                    case MEDIANA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\tanque.png"));
+
+                        break;
+                    case PESADA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\thor.png"));
+
+                        break;
+                    default:
+                        imagen1.setIcon(new ImageIcon(""));
+                        break;
+                }
+                break;
+            case ZERG:
+                switch (comprobarTipo()) {
+                    case LIGERA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\zergling.png"));
+
+                        break;
+                    case MEDIANA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\cuca.png"));
+
+                        break;
+                    case PESADA:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\ultra.png"));
+
+                        break;
+                    default:
+                        imagen1.setIcon(new ImageIcon(""));
+                        break;
+                }
+                break;
+            default:
+                imagen1.setIcon(new ImageIcon(""));
+
+                break;
+        }
+    }
+
+    /**
+     * Modifica la imagen segun el tipo de la unidad elegida
+     *
+     * @param tipo tipo de unidad elegida
+     */
+    private void modificarImagenRaza(Tipo tipo) {
+        switch (tipo) {
+            case LIGERA:
+                switch (comprobarRaza()) {
+                    case PROTOS:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\zealot.png"));
+
+                        break;
+                    case TERRAN:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\marine.png"));
+
+                        break;
+                    case ZERG:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\zergling.png"));
+
+                        break;
+                    default:
+                        imagen1.setIcon(new ImageIcon(""));
+                        break;
+                }
+                break;
+            case MEDIANA:
+                switch (comprobarRaza()) {
+                    case PROTOS:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\inmortal.png"));
+
+                        break;
+                    case TERRAN:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\tanque.png"));
+
+                        break;
+                    case ZERG:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\cuca.png"));
+
+                        break;
+                    default:
+                        imagen1.setIcon(new ImageIcon(""));
+                        break;
+                }
+                break;
+            case PESADA:
+                switch (comprobarRaza()) {
+                    case PROTOS:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\coloso.png"));
+
+                        break;
+                    case TERRAN:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\thor.png"));
+
+                        break;
+                    case ZERG:
+                        imagen1.setIcon(new ImageIcon("src\\otros\\ultra.png"));
+
+                        break;
+                    default:
+                        imagen1.setIcon(new ImageIcon(""));
+                        break;
+                }
+                break;
+            default:
+                imagen1.setIcon(new ImageIcon(""));
+
+                break;
+        }
     }
 }

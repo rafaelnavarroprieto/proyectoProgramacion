@@ -117,14 +117,6 @@ public class Terran extends Unidad implements Serializable {
         return 0;
     }
     /**
-     * Método toString de la clase
-     * @return devuelve el estado de la clase
-     */
-    @Override
-    public String toString() {
-        return "" + super.toString() + " Terran{" + "habUtilizada=" + habUtilizada + '}';
-    }
-     /**
      * Método que prueba la comunicación con el objeto
      * @return devuelve un número que simula el daño que realiza la unidad
      */

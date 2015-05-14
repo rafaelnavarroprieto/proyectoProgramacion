@@ -6,6 +6,8 @@
 package GUI;
 
 import informacion.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -54,22 +56,23 @@ public class altaUnidad extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         protos = new javax.swing.JRadioButton();
-        protos.setSelected(true);
         zerg = new javax.swing.JRadioButton();
         terran = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         mediana = new javax.swing.JRadioButton();
         pesada = new javax.swing.JRadioButton();
         ligera = new javax.swing.JRadioButton();
-        ligera.setSelected(true);
         jLabel2 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
         crear = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
+        imagen = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(680, 500));
+        setMaximumSize(new java.awt.Dimension(610, 500));
+        setMinimumSize(new java.awt.Dimension(610, 500));
+        setPreferredSize(new java.awt.Dimension(610, 500));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -82,13 +85,29 @@ public class altaUnidad extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Raza", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Starcraft", 0, 10), new java.awt.Color(0, 0, 204))); // NOI18N
 
         raza.add(protos);
+        protos.setSelected(true);
         protos.setText("Protos");
+        protos.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                zergStateChanged(evt);
+            }
+        });
 
         raza.add(zerg);
         zerg.setText("Zerg");
+        zerg.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                zergStateChanged(evt);
+            }
+        });
 
         raza.add(terran);
         terran.setText("Terran");
+        terran.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                zergStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -118,12 +137,28 @@ public class altaUnidad extends javax.swing.JDialog {
 
         tipo.add(mediana);
         mediana.setText("Mediana");
+        mediana.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ligeraStateChanged(evt);
+            }
+        });
 
         tipo.add(pesada);
         pesada.setText("Pesada");
+        pesada.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ligeraStateChanged(evt);
+            }
+        });
 
         tipo.add(ligera);
+        ligera.setSelected(true);
         ligera.setText("Ligera");
+        ligera.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ligeraStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -207,10 +242,15 @@ public class altaUnidad extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 490, 160));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 490, 160));
+
+        imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/otros/zealot.png"))); // NOI18N
+        imagen.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 102)));
+        imagen.setVerifyInputWhenFocusTarget(false);
+        getContentPane().add(imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, -1, 200));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/otros/FondoFinal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 680, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -234,6 +274,14 @@ public class altaUnidad extends javax.swing.JDialog {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         cerrar();
     }//GEN-LAST:event_formWindowClosing
+
+    private void zergStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_zergStateChanged
+        modificarImagenTipo(comprobarRaza());
+    }//GEN-LAST:event_zergStateChanged
+
+    private void ligeraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ligeraStateChanged
+        modificarImagenRaza(comprobarTipo());
+    }//GEN-LAST:event_ligeraStateChanged
     /**
      * Compruena el radio seleccionado con respecto al tipo de unidad
      *
@@ -273,6 +321,7 @@ public class altaUnidad extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
     private javax.swing.JButton crear;
+    private javax.swing.JLabel imagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -294,5 +343,116 @@ public class altaUnidad extends javax.swing.JDialog {
     private void cerrar() {
         ventanaPrincipal.setVisible(true);
         dispose();
+    }
+    /**
+     * Modifica la imagen segun la raza seleccionada
+     * @param comprobarRaza raza seleccionada
+     */
+    private void modificarImagenTipo(Raza comprobarRaza) {
+        switch (comprobarRaza) {
+            case PROTOS:
+                switch (comprobarTipo()) {
+
+                    case LIGERA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\zealot.png"));
+                        break;
+                    case MEDIANA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\inmortal.png"));
+
+                        break;
+                    case PESADA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\coloso.png"));
+
+                        break;
+                }
+                break;
+            case TERRAN:
+                switch (comprobarTipo()) {
+                    case LIGERA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\marine.png"));
+                        break;
+                    case MEDIANA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\tanque.png"));
+
+                        break;
+                    case PESADA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\thor.png"));
+
+                        break;
+                }
+                break;
+            case ZERG:
+                switch (comprobarTipo()) {
+                    case LIGERA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\zergling.png"));
+
+                        break;
+                    case MEDIANA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\cuca.png"));
+
+                        break;
+                    case PESADA:
+                        imagen.setIcon(new ImageIcon("src\\otros\\ultra.png"));
+
+                        break;
+                }
+                break;
+        }
+    }
+    /**
+     * Modifica la imagen segun el tipo de la unidad elegida
+     * @param tipo tipo de unidad elegida
+     */
+    private void modificarImagenRaza(Tipo tipo) {
+        switch (tipo) {
+            case LIGERA:
+                switch (comprobarRaza()) {
+                    case PROTOS:
+                        imagen.setIcon(new ImageIcon("src\\otros\\zealot.png"));
+
+                        break;
+                    case TERRAN:
+                        imagen.setIcon(new ImageIcon("src\\otros\\marine.png"));
+
+                        break;
+                    case ZERG:
+                        imagen.setIcon(new ImageIcon("src\\otros\\zergling.png"));
+
+                        break;
+                }
+                break;
+            case MEDIANA:
+                switch (comprobarRaza()) {
+                    case PROTOS:
+                        imagen.setIcon(new ImageIcon("src\\otros\\inmortal.png"));
+
+                        break;
+                    case TERRAN:
+                        imagen.setIcon(new ImageIcon("src\\otros\\tanque.png"));
+
+                        break;
+                    case ZERG:
+                        imagen.setIcon(new ImageIcon("src\\otros\\cuca.png"));
+
+                        break;
+                }
+                break;
+            case PESADA:
+                switch (comprobarRaza()) {
+                    case PROTOS:
+                        imagen.setIcon(new ImageIcon("src\\otros\\coloso.png"));
+
+                        break;
+                    case TERRAN:
+                        imagen.setIcon(new ImageIcon("src\\otros\\thor.png"));
+
+                        break;
+                    case ZERG:
+                        imagen.setIcon(new ImageIcon("src\\otros\\ultra.png"));
+
+                        break;
+                }
+                break;
+        }
     }
 }

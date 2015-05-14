@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
  */
 public class Intermediaria implements Serializable {
       /**
-     * Campo que comprueba la modificación de la lista
+     * Campo que comprueba la modificacián de la lista
      */
     public static boolean modificado = false;
     
@@ -69,7 +69,7 @@ public class Intermediaria implements Serializable {
     /**
      * Método que valida el nombre del fichero
      * @param nombre nombre del fichero
-     * @return devuelve true si el nombre  cumple el patrón o false si el nombre no cumple el patrón
+     * @return devuelve true si el nombre es cumple el patrón o false si el nombre no cumple el patrón
      */
     public static boolean validarFichero(String nombre) {
         return patronFichero.matcher(nombre).matches();
@@ -78,7 +78,7 @@ public class Intermediaria implements Serializable {
      * Método guardar un objeto pidiendo un nombre de archivo que se creara
      *
      * @param objeto objeto que se le pasa para guardar
-     * @param nombre nombre del archivo
+     * @param nombre fichero seleccionado
      * @throws IOException Exception que lanza cuando el flujo acaba
      */
     public static void guardarComo(Object objeto, File nombre) throws IOException {
@@ -97,7 +97,7 @@ public class Intermediaria implements Serializable {
      *
      * @param fichero2 nombre del archivo
      * @return devuelve el archivo sin ninguna modificación si el nombre
-     * coincide con el patrón especificado o en caso negativo se le añadira al
+     * coincide con el patron especificado o en caso negativo se le añadira al
      * archivo la extension .rnp
      */
     public static File comprobarArchivo(File fichero2) {
@@ -127,7 +127,6 @@ public class Intermediaria implements Serializable {
     /**
      * Método que crea un nuevo archivo
      *
-     * @return mensaje indicando como se llamara el archivo por defecto
      */
     public static void nuevo() {
         setArchivo("Sin_Titulo");
@@ -136,7 +135,6 @@ public class Intermediaria implements Serializable {
     /**
      * Método que te carga un fichero que contiene un objeto
      *
-     * @return Devuelve el contenido del archivo de tipo object
      * @throws IOException Exception que lanza cuando el flujo acaba
      * @throws ClassNotFoundException Exception que se lanza si el objeto
      * destino pertenece a la misma clase que el objeto del fichero

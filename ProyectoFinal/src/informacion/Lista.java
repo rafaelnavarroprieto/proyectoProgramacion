@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Emvoltorio de la lista que contendra las unidades y una serie de métodos
+ * Emboltório de la lista que contendra las unidades y una serie de métodos
  * básicos:
  * <li>
  * <ol>Añadir</ol>
@@ -58,9 +58,11 @@ public class Lista implements Serializable {
                 unidadTemporal = null;
                 break;
         }
-        if (lista.contains(unidadTemporal)) {
-            throw new UnidadRepetidaException("La unidad ya fue creada");
-        }
+        
+            if (lista.contains(unidadTemporal)) {
+                throw new UnidadRepetidaException("La unidad ya fue creada");
+            }
+        
         Intermediaria.setModificado(true);
         return lista.add(unidadTemporal);
     }
@@ -84,16 +86,6 @@ public class Lista implements Serializable {
 
     }
 
-    /**
-     * Método toString que muestra la lista
-     *
-     * @return devuelve un mensaje mostrando todas las unidades que almacena la
-     * lista
-     */
-    @Override
-    public String toString() {
-        return "Lista{" + "lista=" + lista + '}';
-    }
 
     /**
      * Método que devuelve una unidad de la lista por le nombre
@@ -118,7 +110,7 @@ public class Lista implements Serializable {
     }
 
     /**
-     * Método que muestra el tamaÃ±o de la lista
+     * Método que muestra el tamaño de la lista
      *
      * @return devuelve el número de unidades que tiene la lista
      */
@@ -160,7 +152,7 @@ public class Lista implements Serializable {
     }
 
     /**
-     * Método que devuelve una lista con las unidades de un mismo tipo
+     * Mértodo que devuelve una lista con las unidades de un mismo tipo
      *
      * @param tipo tipo de la unidad
      * @return devuelve una lista con todas las unidades de un mismo tipo

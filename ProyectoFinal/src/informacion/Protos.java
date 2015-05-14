@@ -71,7 +71,7 @@ public class Protos extends Unidad implements Serializable{
      * Constructor
      * @param nombre nombre de la unidad
      * @param tipo tipo de la unidad
-     * @throws NombreNoValidoException excepción que salta si el nombre no cumple el patrón
+     * @throws NombreNoValidoException excepción que salta si el nombre no cumple el patron
      */
     public Protos(String nombre, Tipo tipo) throws NombreNoValidoException {
         super(nombre,tipo);
@@ -89,15 +89,6 @@ public class Protos extends Unidad implements Serializable{
         }
     }
     /**
-     * Método toString de la clase 
-     * @return devuelve un mensaje con la información de la unidad
-     */
-    @Override
-    public String toString() {
-        return ""+ super.toString()+" Protos{" + "escudo=" + escudo + "\n regenerable=" + regenerable + ""
-                + "\n regeneracionDeEscudo=" + regeneracionDeEscudo + '}';
-    }
-     /**
      * Método para regenerar el escudo de las unidades
      */
     public void regenerarEscudo() {

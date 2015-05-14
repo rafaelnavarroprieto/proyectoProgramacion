@@ -80,7 +80,7 @@ public class Ayuda extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 51, 255)), "Buscar unidades", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Starcraft", 0, 12), new java.awt.Color(0, 0, 255))); // NOI18N
 
-        jLabel4.setText("<html>\n<head>\n<style>\nh1 {color:Black; text-align:center;}\n</style>\n</head>\n<body>\n<h2>Busqueda de unidades</h2>\n<p>La busqueda de unidades se podra realizar a traves de 3 posibles opciónes:<br>\n<ol>\n<li>Busqueda global</li><br>\n<li>Busqueda por raza</li><br>\n<li>Busqueda por Tipo de unidad</li><br>\n</ol></p>\n</body>\n</html>");
+        jLabel4.setText("<html>\n<head>\n<style>\nh1 {color:Black; text-align:center;}\n</style>\n</head>\n<body>\n<h2>Busqueda de unidades</h2>\n<p>La busqueda de unidades se podra realizar a traves de 3 posibles opciones:<br>\n<ol>\n<li>Busqueda global</li><br>\n<li>Busqueda por raza</li><br>\n<li>Busqueda por Tipo de unidad</li><br>\n</ol></p>\n</body>\n</html>");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

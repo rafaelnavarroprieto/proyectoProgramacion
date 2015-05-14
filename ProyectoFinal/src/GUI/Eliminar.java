@@ -115,7 +115,7 @@ public class Eliminar extends javax.swing.JDialog {
             //Mensaje para confirmar la eliminación
             
             Object[] options = {"Si", "No"};
-            int respuesta = JOptionPane.showOptionDialog(null, "Vas a eliminar a " + nombre.getText() + " Â¿Estas seguro?", "Eliminando",
+            int respuesta = JOptionPane.showOptionDialog(null, "Vas a eliminar a " + nombre.getText() + "¿Estas seguro?", "Eliminando",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                     null, options, options[0]);
             

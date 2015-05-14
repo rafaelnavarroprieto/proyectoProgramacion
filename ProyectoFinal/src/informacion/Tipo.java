@@ -6,7 +6,7 @@
 package informacion;
 
 /**
- * EnumeraciÃ³n que contiene los diferentes tipos de unidades con su
+ * Enumeración que contiene los diferentes tipos de unidades con su
  * correspondiente vida y ataque base
  *
  * @author Rafael Navarro Prieto

@@ -57,7 +57,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuAyuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(680, 500));
+        setMaximumSize(new java.awt.Dimension(610, 500));
+        setMinimumSize(new java.awt.Dimension(610, 500));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -72,7 +73,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 mostrarActionPerformed(evt);
             }
         });
-        getContentPane().add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 310, 160, -1));
+        getContentPane().add(mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 160, -1));
 
         crear.setText("Crear unidades");
         crear.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +81,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 crearActionPerformed(evt);
             }
         });
-        getContentPane().add(crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 160, -1));
+        getContentPane().add(crear, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 160, -1));
 
         arena.setText("arena");
         arena.setEnabled(false);
@@ -92,7 +93,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 arenaMouseExited(evt);
             }
         });
-        getContentPane().add(arena, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 160, -1));
+        getContentPane().add(arena, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 160, -1));
 
         salir.setText("Salir");
         salir.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +101,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 salirActionPerformed(evt);
             }
         });
-        getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 160, -1));
+        getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 160, -1));
 
         eliminar.setText("Eliminar unidades");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,21 +109,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 eliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 160, -1));
+        getContentPane().add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 160, -1));
 
         mensajeArena.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         mensajeArena.setForeground(new java.awt.Color(255, 0, 0));
-        mensajeArena.setText("OpciÃ³n en construcciÃ³n");
-        getContentPane().add(mensajeArena, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 180, 20));
+        mensajeArena.setText("Opción en construcción");
+        getContentPane().add(mensajeArena, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 180, 20));
 
         jLabel2.setFont(new java.awt.Font("Starcraft", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("The end battle");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 280, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 280, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/otros/FondoFinal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 630, 480));
 
         menuArchivo.setMnemonic('A');
         menuArchivo.setText("Archivo");
@@ -198,11 +199,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_arenaMouseExited
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-        System.exit(0);
+        cerrar();
     }//GEN-LAST:event_salirActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
-        System.exit(0);
+        cerrar();
     }//GEN-LAST:event_exitActionPerformed
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
@@ -236,32 +237,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if (Intermediaria.isModificado()) { // Si se modifico la lista
             Object[] options = {"OK", "NO", "CANCEL"};
-            int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, ¿Desea Guardar?", "NO HAS GUARDADO!!!!!",
+            int respuesta = JOptionPane.showOptionDialog(null, "No has guardado,¿Desea Guardar?", "NO HAS GUARDADO!!!!!",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                     null, options, options[0]);
             switch (respuesta) {
                 case JOptionPane.YES_OPTION:
                     guardarComoFile();
-                    Intermediaria.setArchivo("Sin_titulo");
-                    Intermediaria.lista = new Lista();
-                    setTitle(Intermediaria.archivo.getName());
+				nuevo();
 
                     return;
                 case JOptionPane.NO_OPTION:
-                    Intermediaria.setArchivo("Sin_titulo");
-                    Intermediaria.lista = new Lista();
-                    setTitle(Intermediaria.archivo.getName());
+				nuevo();
 
                     return;
             }
         }
         // Si no se modifico
-        Intermediaria.setArchivo("Sin_titulo");
-        Intermediaria.lista = new Lista();
-        setTitle(Intermediaria.archivo.getName());
+        nuevo();
 
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+    /**
+     * Metodo que abre un archivo nuevo
+     */
+	private void nuevo() {
+		Intermediaria.setArchivo("Sin_titulo");
+        Intermediaria.lista = new Lista();
+        setTitle(Intermediaria.archivo.getName());
+	}
 
     private void guardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarComoActionPerformed
         guardarComoFile();
@@ -275,7 +278,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try {
             if (Intermediaria.isModificado()) { // Si se modifico la lista
                 Object[] options = {"OK", "NO", "CANCEL"};
-                int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, ¿Desea Guardar?", "NO HAS GUARDADO!!!!!",
+                int respuesta = JOptionPane.showOptionDialog(null, "No has guardado,¿Desea Guardar?", "NO HAS GUARDADO!!!!!",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                         null, options, options[0]);
                 switch (respuesta) {
@@ -290,11 +293,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         return;
                 }
             }
-            
+
             // Si no se modifico la lista 
-            
             abrirArchivo();
-            
+
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(contentPanel, "El archivo no se ha podido abrir", "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
             Intermediaria.nuevo();
@@ -303,29 +305,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_abrirActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (Intermediaria.isModificado()) { // Si se modifico la lista
-            Object[] options = {"OK", "NO", "CANCEL"};
-            int respuesta = JOptionPane.showOptionDialog(null, "No has guardado, ¿Desea Guardar?", "NO HAS GUARDADO!!!!!",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                    null, options, options[0]);
-            switch (respuesta) {
-                case JOptionPane.YES_OPTION: //Se lanza el guardarComo
-                    guardarComo();
-                    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                    return;
-                case JOptionPane.NO_OPTION: //Se cierra 
-                    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                    return;
-                case JOptionPane.CANCEL_OPTION: //No ocurre nada
-                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-                    return;
-            }
-        }
-        // Si no se modifico la lista
-        ayuda.dispose();
+        cerrar();
     }//GEN-LAST:event_formWindowClosing
 
     /**
+     * Método main
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -361,7 +345,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
     /**
-     * clase que se utiliza para los mensajes de error o de información
+     * clase que se utiliza para los mensajes de error o de informaciï¿½n
      */
     protected final JPanel contentPanel = new JPanel();
     /**
@@ -413,20 +397,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         guardarComo.setAcceptAllFileFilterUsed(false);
         guardarComo.addChoosableFileFilter(filtro);
 
-        //Si se pulsa el boton aceptar
-        
+        //Si se pulsa el botón aceptar
         if (guardarComo.APPROVE_OPTION == guardarComo.showDialog(guardarComo, "Guardar Archivo")) {
             guardarComo.setAcceptAllFileFilterUsed(false);
             Intermediaria.comprobarArchivo(guardarComo.getSelectedFile());
             if (Intermediaria.archivo.exists()) { // si el archivo existe, preguntamos si sobreescribimos
                 Object[] options = {"Si", "No"};
-                int respuesta = JOptionPane.showOptionDialog(null, "El archivo ya existe, ¿Desea Sobreescribir?", "Guardando",
+                int respuesta = JOptionPane.showOptionDialog(null, "El archivo ya existe,¿Desea Sobreescribir?", "Guardando",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                         null, options, options[0]);
-                //acciones a realizar segun el boton seleccionado en el JFileChooser
+                //acciones a realizar segun el botón seleccionado en el JFileChooser
                 switch (respuesta) {
                     case JOptionPane.YES_OPTION:
-                guardarArchivoDelJFileChooser();
+                        guardarArchivoDelJFileChooser();
                         return;
                     case JOptionPane.NO_OPTION:
                         JOptionPane.showMessageDialog(null, "El archivo no se ha guardado", "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
@@ -440,11 +423,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         }
     }
+
     /**
-     * Guardamos el archivo 
+     * Guardamos el archivo
      */
     private void guardarArchivoDelJFileChooser() {
-          try {
+        try {
             Intermediaria.guardarComo(Intermediaria.lista, Intermediaria.archivo);
             setTitle(Intermediaria.archivo.getName());
         } catch (IOException ex) {
@@ -461,13 +445,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     private void abrirArchivo() throws ClassNotFoundException, IOException {
         //Creamos el JFileChooser
-        
+
         JFileChooser abrir = new JFileChooser();
         abrir.setAcceptAllFileFilterUsed(false);
         abrir.addChoosableFileFilter(filtro);
-        
-        //Si se pulsa el boton aceptar
-        
+
+        //Si se pulsa el botón aceptar
         if (abrir.showDialog(abrir, "Abrir Archivo") == abrir.APPROVE_OPTION) {
             Intermediaria.archivo = abrir.getSelectedFile();
             Intermediaria.abrir(abrir.getSelectedFile());
@@ -490,5 +473,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } catch (IOException ex) {
             }
         }
+    }
+    /**
+     * Método que cierra el programa
+     */
+    private void cerrar() {
+        if (Intermediaria.isModificado()) { // Si se modifico la lista
+            Object[] options = {"OK", "NO", "CANCEL"};
+            int respuesta = JOptionPane.showOptionDialog(null, "No has guardado,¿Desea Guardar?", "NO HAS GUARDADO!!!!!",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                    null, options, options[0]);
+            switch (respuesta) {
+                case JOptionPane.YES_OPTION: //Se lanza el guardarComo
+                    guardarComo();
+                    System.exit(0);
+                    return;
+                case JOptionPane.NO_OPTION: //Se cierra 
+                    System.exit(0);
+                    return;
+                case JOptionPane.CANCEL_OPTION: //No ocurre nada
+                    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+                    return;
+            }
+        }
+        // Si no se modifico la lista
+        ayuda.dispose();
+        System.exit(0);
     }
 }

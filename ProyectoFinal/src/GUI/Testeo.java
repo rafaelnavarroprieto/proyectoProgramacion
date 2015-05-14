@@ -80,6 +80,8 @@ public class Testeo extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(610, 500));
+        setMinimumSize(new java.awt.Dimension(610, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -229,10 +231,10 @@ public class Testeo extends javax.swing.JDialog {
                     .addComponent(jButton1)))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 530, 190));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 530, 190));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/otros/FondoFinal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 680, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,7 +252,7 @@ public class Testeo extends javax.swing.JDialog {
         if (danio == 0) {
             historial.append(unidad.getNombre() + " ha fallado el ataque.\n");
         } else {
-            historial.append(unidad.getNombre() + " ha realizado un golpe de " + danio + " de daÑo.\n");
+            historial.append(unidad.getNombre() + " ha realizado un golpe de " + danio + " de daño.\n");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
