@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  * @author Rafael Navarro Prieto
  * @version 1.0
  */
-public class altaUnidad extends javax.swing.JDialog {
+public class AltaUnidad extends javax.swing.JDialog {
 
     /**
      * clase que se utiliza para los mensajes de error o de información
@@ -34,9 +34,9 @@ public class altaUnidad extends javax.swing.JDialog {
      *
      * @param principal ventana principal
      */
-    public altaUnidad(JFrame principal) {
+    public AltaUnidad(JFrame principal) {
         initComponents();
-        setTitle("Sin_Titulo - A\u00F1adir unidad - 09-may-2015");
+        setTitle(Intermediaria.archivo.getName()+"- A\u00F1adir unidad - 09-may-2015");
         this.ventanaPrincipal = principal;
         setLocationRelativeTo(null);
 

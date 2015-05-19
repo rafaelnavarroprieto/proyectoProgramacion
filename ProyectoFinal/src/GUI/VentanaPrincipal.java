@@ -55,6 +55,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         exit = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(610, 500));
@@ -185,6 +186,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(menuAyuda);
 
+        jMenu1.setText("Acerca de...");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -207,7 +216,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-        alta = new altaUnidad(this);
+        alta = new AltaUnidad(this);
         alta.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_crearActionPerformed
@@ -242,7 +251,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     null, options, options[0]);
             switch (respuesta) {
                 case JOptionPane.YES_OPTION:
-                    guardarComo();
+                    guardar();
 				Intermediaria.nuevo();
 
                     return;
@@ -268,7 +277,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_guardarComoActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        guardarComo();
+        guardar();
     }//GEN-LAST:event_guardarActionPerformed
 
     private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
@@ -280,7 +289,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         null, options, options[0]);
                 switch (respuesta) {
                     case JOptionPane.YES_OPTION:
-                        guardarComo();
+                        guardar();
                         abrirArchivo();
                         setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
                         return;
@@ -299,19 +308,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
 
 
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | IOException ex) {
             JOptionPane.showMessageDialog(contentPanel, "El archivo no se ha podido abrir", "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
             Intermediaria.nuevo();
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(contentPanel, "El archivo no se ha podido abrir", "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
-
-
         }
     }//GEN-LAST:event_abrirActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         cerrar();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        acercaDe = new AcercaDe();
+        acercaDe.setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
      * Método main
@@ -350,13 +360,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
     /**
-     * clase que se utiliza para los mensajes de error o de informaciï¿½n
+     * clase que se utiliza para los mensajes de error o de información
      */
     protected final JPanel contentPanel = new JPanel();
     /**
      * Ventana para añadir unidades
      */
-    private altaUnidad alta;
+    private AltaUnidad alta;
     /**
      *
      * Ventana para eliminar unidades
@@ -374,6 +384,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Filtro aplicado a los JFileChooser
      */
     private final Filtro filtro = new Filtro(".rnp", "Rafael Navarro Prieto");
+    /**
+     * Ventana acerca de
+     */
+    private AcercaDe acercaDe;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem abrir;
     private javax.swing.JButton arena;
@@ -384,6 +398,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem guardarComo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -402,7 +417,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         guardarComo.setAcceptAllFileFilterUsed(false);
         guardarComo.addChoosableFileFilter(filtro);
 
-        //Si se pulsa el botón aceptar
+        //Si se pulsa el botï¿½n aceptar
         if (guardarComo.APPROVE_OPTION == guardarComo.showDialog(guardarComo, "Guardar Archivo")) {
             guardarComo.setAcceptAllFileFilterUsed(false);
             Intermediaria.comprobarArchivo(guardarComo.getSelectedFile());
@@ -411,7 +426,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int respuesta = JOptionPane.showOptionDialog(null, "El archivo ya existe,¿Desea Sobreescribir?", "Guardando",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                         null, options, options[0]);
-                //acciones a realizar segun el botón seleccionado en el JFileChooser
+                //acciones a realizar segun el botï¿½n seleccionado en el JFileChooser
                 switch (respuesta) {
                     case JOptionPane.YES_OPTION:
                         guardarArchivoDelJFileChooser();
@@ -467,7 +482,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Operación que se realiza para guardar un archivo ya abierto
      */
-    private void guardarComo() {
+    private void guardar() {
         if (Intermediaria.archivo.getName().equalsIgnoreCase("Sin_titulo")) {
             guardarComoFile();
 
@@ -490,7 +505,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     null, options, options[0]);
             switch (respuesta) {
                 case JOptionPane.YES_OPTION: //Se lanza el guardarComo
-                    guardarComo();
+                    guardar();
                     System.exit(0);
                     return;
                 case JOptionPane.NO_OPTION: //Se cierra 
@@ -502,7 +517,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
         // Si no se modifico la lista
-        ayuda.dispose();
-        System.exit(0);
+         System.exit(0);
     }
 }

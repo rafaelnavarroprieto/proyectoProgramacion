@@ -50,7 +50,7 @@ public class Ayuda extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 255)), "Crear unidades", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Starcraft", 0, 12), new java.awt.Color(0, 0, 255))); // NOI18N
 
-        jLabel1.setText("<html>\r\n<body>\r\n<h2>Creaci\u00F3n de unidades</h2>\r\n<p>Para la creaci\u00F3n de unidades se debe de cumplir un \u00FAnico requisito:<br>\r\n<ol>\r\n<li>El nombre debe de empezar por may\u00FAscula y debe de tener, al menos, 4 letras.</li><br>\r\n<li>Una raza.</li> <br>\r\n<li>Un tipo de unidad.</li>\r\n</ol>\r\n</p>\r\n</html>\r\n</body>");
+        jLabel1.setText("<html>\r\n<body>\r\n<h2>Creaci\u00F3n de unidades</h2>\r\n<p>Para la creaci\u00F3n de unidades se debe de cumplir unos requisitos:<br>\r\n<ol>\r\n<li>El nombre debe de tener un máximo de 4 letras, no se aceptara mayúsculas salvo la primera letra del nombre.</li><br>\r\n<li>Una raza.</li> <br>\r\n<li>Un tipo de unidad.</li>\r\n</ol>\r\n</p>\r\n</html>\r\n</body>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
