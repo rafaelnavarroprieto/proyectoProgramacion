@@ -243,11 +243,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             switch (respuesta) {
                 case JOptionPane.YES_OPTION:
                     guardarComo();
-				nuevo();
+				Intermediaria.nuevo();
 
                     return;
                 case JOptionPane.NO_OPTION:
-				nuevo();
+    				Intermediaria.nuevo();
+    				setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
 
                     return;
 			case JOptionPane.CANCEL_OPTION:
@@ -256,19 +257,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
         // Si no se modifico
-        nuevo();
+		Intermediaria.nuevo();
+		setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
 
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    /**
-     * Metodo que abre un archivo nuevo
-     */
-	private void nuevo() {
-		Intermediaria.setArchivo("Sin_titulo");
-        Intermediaria.lista = new Lista();
-        setTitle(Intermediaria.archivo.getName());
-	}
-
+   
     private void guardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarComoActionPerformed
         guardarComoFile();
     }//GEN-LAST:event_guardarComoActionPerformed
@@ -288,9 +282,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     case JOptionPane.YES_OPTION:
                         guardarComo();
                         abrirArchivo();
+                        setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
                         return;
                     case JOptionPane.NO_OPTION:
                         abrirArchivo();
+                        setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
+
                         return;
                     case JOptionPane.CANCEL_OPTION:
                         return;
@@ -299,6 +296,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             // Si no se modifico la lista 
             abrirArchivo();
+            setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
+
 
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(contentPanel, "El archivo no se ha podido abrir", "ERROR!!!!", JOptionPane.ERROR_MESSAGE);

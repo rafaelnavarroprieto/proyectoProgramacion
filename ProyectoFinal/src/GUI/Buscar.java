@@ -1629,7 +1629,7 @@ public class Buscar extends javax.swing.JDialog {
     /**
      * Modifica la imagen segun la raza seleccionada
      *
-     * @param comprobarRaza raza seleccionada
+     * @param raza raza seleccionada
      */
     private void modificarImagenTipo(Raza raza) {
         switch (raza) {
