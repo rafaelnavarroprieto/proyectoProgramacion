@@ -242,7 +242,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     null, options, options[0]);
             switch (respuesta) {
                 case JOptionPane.YES_OPTION:
-                    guardarComoFile();
+                    guardarComo();
 				nuevo();
 
                     return;
@@ -283,7 +283,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         null, options, options[0]);
                 switch (respuesta) {
                     case JOptionPane.YES_OPTION:
-                        guardarComoFile();
+                        guardarComo();
                         abrirArchivo();
                         return;
                     case JOptionPane.NO_OPTION:
@@ -301,6 +301,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(contentPanel, "El archivo no se ha podido abrir", "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
             Intermediaria.nuevo();
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(contentPanel, "El archivo no se ha podido abrir", "ERROR!!!!", JOptionPane.ERROR_MESSAGE);
+
+
         }
     }//GEN-LAST:event_abrirActionPerformed
 
