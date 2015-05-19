@@ -75,15 +75,15 @@ public class Terran extends Unidad implements Serializable {
         switch (tipo) {
             case LIGERA:
                 bonificador = (int) (Math.random() * 4 + 3);
-                resultado = Math.round((tipo.vida * (bonificador * 2.5f)*100)/100);
+                resultado = Math.round((tipo.vida * (bonificador * 2.5f) * 100) / 100);
                 return resultado;
             case MEDIANA:
                 bonificador = (int) (Math.random() * 6 + 4);
-                resultado = Math.round((((tipo.vida * (bonificador * 2.5f))*0.5)*100)/100);
+                resultado = Math.round((((tipo.vida * (bonificador * 2.5f)) * 0.5) * 100) / 100);
                 return resultado;
             case PESADA:
                 bonificador = (int) (Math.random() * 2 + 1);
-                resultado = Math.round(((tipo.vida * (bonificador * 4) * 0.3f)*100)/100);
+                resultado = Math.round(((tipo.vida * (bonificador * 4) * 0.3f) * 100) / 100);
                 return resultado;
         }
         return 0;
@@ -103,55 +103,133 @@ public class Terran extends Unidad implements Serializable {
         switch (tipo) {
             case LIGERA:
                 bonificador = (int) (Math.random() * 3 + 1);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.5f)*100)/100);
+                resultado = Math.round((tipo.ataque * (bonificador * 0.5f) * 100) / 100);
                 return resultado;
             case MEDIANA:
                 bonificador = (int) (Math.random() * 4 + 2);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.3f)*100)/100);
+                resultado = Math.round((tipo.ataque * (bonificador * 0.3f) * 100) / 100);
                 return resultado;
             case PESADA:
                 bonificador = (int) (Math.random() * 4 + 3);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.3f)*100)/100);
+                resultado = Math.round((tipo.ataque * (bonificador * 0.3f) * 100) / 100);
                 return resultado;
         }
         return 0;
     }
     /**
-     * Método que prueba la comunicación con el objeto
-     * @return devuelve un número que simula el daño que realiza la unidad
+     * Ataque avanzado
+     * @return devuelve el daño realizado
      */
-      @Override
-    public float test() {
+    @Override
+    public float ataqueAvanzado() {
         float danio;
         int probabilidadDeGolpe;
-        switch(getTipo()){
-           case LIGERA:
-               probabilidadDeGolpe = (int) (Math.random()*10 +1);
-               if (probabilidadDeGolpe > 8) {
-                   danio = 0;
-               }else{
-               danio = Math.round(((getAtaque() / 1.1f)*(int)(Math.random()*3+1)*100)/100);
-               }
-               break;
-           case MEDIANA:
-               probabilidadDeGolpe = (int) (Math.random()*10 +1);
-               if (probabilidadDeGolpe >6) {
-                   danio = 0;
-               }else{
-               danio = Math.round(((getAtaque() / 1.1f)*(int)(Math.random()*4+1)*100)/100);
-               }
-               break;
-           case PESADA:
-               probabilidadDeGolpe = (int) (Math.random()*10 +1);
-               if (probabilidadDeGolpe > 3) {
-                   danio = 0;
-               }else{
-               danio = Math.round(((getAtaque() / 1.1f)*(int)(Math.random()*4+1)*100)/100);
-               }
-               break;
-               default:
-                   danio = 0;
-                   break;
+        switch (getTipo()) {
+            case LIGERA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 8) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 0.6f) * (int) (Math.random() * 3 + 1) * 100) / 100);
+                }
+                break;
+            case MEDIANA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 6) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 0.6f) * (int) (Math.random() * 4 + 1) * 100) / 100);
+                }
+                break;
+            case PESADA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 3) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 0.8f) * (int) (Math.random() * 4 + 1) * 100) / 100);
+                }
+                break;
+            default:
+                danio = 0;
+                break;
+        }
+        return danio;
+    }
+    /**
+     * Ataque medio
+     * @return devuelve el daño realizado
+     */
+    @Override
+    public float ataqueMedio() {
+        float danio;
+        int probabilidadDeGolpe;
+        switch (getTipo()) {
+            case LIGERA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 8) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 0.8f) * (int) (Math.random() * 3 + 1) * 100) / 100);
+                }
+                break;
+            case MEDIANA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 6) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 0.8f) * (int) (Math.random() * 4 + 1) * 100) / 100);
+                }
+                break;
+            case PESADA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 3) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 1.0f) * (int) (Math.random() * 4 + 1) * 100) / 100);
+                }
+                break;
+            default:
+                danio = 0;
+                break;
+        }
+        return danio;
+    }
+    /**
+     * Ataque básico
+     * @return devuelve el daño realizado
+     */
+    @Override
+    public float ataqueBasico() {
+        float danio;
+        int probabilidadDeGolpe;
+        switch (getTipo()) {
+            case LIGERA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 8) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 1.1f) * (int) (Math.random() * 3 + 1) * 100) / 100);
+                }
+                break;
+            case MEDIANA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 6) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 1.1f) * (int) (Math.random() * 4 + 1) * 100) / 100);
+                }
+                break;
+            case PESADA:
+                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+                if (probabilidadDeGolpe > 3) {
+                    danio = 0;
+                } else {
+                    danio = Math.round(((getAtaque() / 1.1f) * (int) (Math.random() * 4 + 1) * 100) / 100);
+                }
+                break;
+            default:
+                danio = 0;
+                break;
         }
         return danio;
     }

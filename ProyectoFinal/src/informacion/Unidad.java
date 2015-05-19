@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  * @author Rafael Navarro Prieto
  * @version 1.0
  */
-public abstract class Unidad implements Creacionable, Serializable {
+public abstract class Unidad implements Creacionable, Serializable, Combatible {
     
     /**
      * Patron que controla el nombre de los personajes
@@ -143,7 +143,7 @@ public abstract class Unidad implements Creacionable, Serializable {
      *
      * @param nombre nombre para asignar
      * @throws NombreNoValidoException excepción que salta cuando el nombre no
-     * es valido segun el patron especifico
+     * es valido segun el patrón especifico
      *
      */
     public void setNombre(String nombre) throws NombreNoValidoException {
@@ -241,18 +241,14 @@ public abstract class Unidad implements Creacionable, Serializable {
 
     /**
      * Método que calcula el ataque de las unidades
+     * 
      *
      * @param tipo tipo de la unidad
      * @return devuelve la cantidad de ataque final de la unidad
      */
     @Override
     public abstract float calcularAtaque(Tipo tipo);
-    /**
-     * Método que interactua con las unidades
-     * @return devuelve un número indicando el daño que realiza
-     */
-    public abstract float test();
-   @Override
+     @Override
     public int hashCode() {
         int hash = 5;
         hash = 23 * hash + Objects.hashCode(this.nombre);
@@ -274,5 +270,23 @@ public abstract class Unidad implements Creacionable, Serializable {
         }
         return true;
     }
+    /**
+     * Ataque avanzado
+     * @return devuelve el daño realizado
+     */
+    @Override
+    public abstract float ataqueAvanzado();
+    /**
+     * Ataque medio
+     * @return devuelve el daño realizado
+     */
+    @Override
+    public abstract float ataqueMedio();
+    /**
+     * Ataque básico
+     * @return devuelve el daño realizado
+     */
+    @Override
+    public abstract float ataqueBasico();
 
 }
