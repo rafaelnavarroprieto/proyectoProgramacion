@@ -250,6 +250,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 				nuevo();
 
                     return;
+			case JOptionPane.CANCEL_OPTION:
+				return;
+
             }
         }
         // Si no se modifico
