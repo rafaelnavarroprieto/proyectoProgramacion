@@ -129,7 +129,7 @@ public class Intermediaria implements Serializable {
      *
      */
     public static void nuevo() {
-    	setArchivo("Sin_titulo");
+    	setArchivo("Sin_Titulo");
         lista = new Lista();
         setModificado(false);
         

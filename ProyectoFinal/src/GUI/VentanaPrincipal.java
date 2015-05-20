@@ -417,7 +417,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         guardarComo.setAcceptAllFileFilterUsed(false);
         guardarComo.addChoosableFileFilter(filtro);
 
-        //Si se pulsa el botï¿½n aceptar
+        //Si se pulsa el botón aceptar
         if (guardarComo.APPROVE_OPTION == guardarComo.showDialog(guardarComo, "Guardar Archivo")) {
             guardarComo.setAcceptAllFileFilterUsed(false);
             Intermediaria.comprobarArchivo(guardarComo.getSelectedFile());
@@ -426,9 +426,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 int respuesta = JOptionPane.showOptionDialog(null, "El archivo ya existe,¿Desea Sobreescribir?", "Guardando",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                         null, options, options[0]);
-                //acciones a realizar segun el botï¿½n seleccionado en el JFileChooser
+                //acciones a realizar segun el botón seleccionado en el JFileChooser
                 switch (respuesta) {
                     case JOptionPane.YES_OPTION:
+                    	Intermediaria.archivo = guardarComo.getSelectedFile();
                         guardarArchivoDelJFileChooser();
                         return;
                     case JOptionPane.NO_OPTION:
@@ -450,7 +451,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void guardarArchivoDelJFileChooser() {
         try {
             Intermediaria.guardarComo(Intermediaria.lista, Intermediaria.archivo);
-            setTitle(Intermediaria.archivo.getName());
+            setTitle(Intermediaria.archivo.getName() + " - Ventana principal - " + Intermediaria.getFecha());
         } catch (IOException ex) {
         }
     }
