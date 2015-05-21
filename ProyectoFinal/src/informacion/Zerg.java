@@ -85,8 +85,7 @@ public class Zerg extends Unidad implements Serializable {
      */
     @Override
     public float calcularVida(Tipo tipo) {
-        float resultado;
-        int bonificador;
+ 
         switch (tipo) {
             case LIGERA:
 			return realizarOperacionCalcularVida(tipo,4,2,getStatRaza());
@@ -128,8 +127,7 @@ public class Zerg extends Unidad implements Serializable {
      */
     @Override
     public float calcularAtaque(Tipo tipo) {
-        float resultado;
-        int bonificador;
+  
         switch (tipo) {
             case LIGERA:
 			return realizarOperacionCalcularAtaque(tipo,3,2,getStatRaza());
@@ -168,7 +166,6 @@ public class Zerg extends Unidad implements Serializable {
      */
     public float ataqueAvanzado() {
         float danio;
-        int probabilidadDeGolpe;
         switch (getTipo()) {
             case LIGERA:
     			return realizarAtaque(0.5f, 3, 2);
