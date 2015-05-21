@@ -14,12 +14,21 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class Zerg extends Unidad implements Serializable {
-
+	/**
+	 * Estadistica unica de la raza
+	 */
+	private static float statRaza = 0.3f;
+	
     /**
+	 * @return the statRaza
+	 */
+	public static float getStatRaza() {
+		return statRaza;
+	}
+	/**
      * Campo que contiene la regeneración de vida
      */
     private float regeneracionDeVida;
-
     /**
      * Método get del campo regeneracionDeVida
      *
@@ -28,7 +37,6 @@ public class Zerg extends Unidad implements Serializable {
     public float getRegeneracionDeVida() {
         return regeneracionDeVida;
     }
-
     /**
      * Método set de la regeneracionDeVida
      *
@@ -81,20 +89,35 @@ public class Zerg extends Unidad implements Serializable {
         int bonificador;
         switch (tipo) {
             case LIGERA:
-                bonificador = (int) (Math.random() * 3 + 1);
-                resultado = Math.round((tipo.vida * (bonificador * 2.5f) * 100) / 100);
-                return resultado;
+			return realizarOperacionCalcularVida(tipo,4,2,getStatRaza());
             case MEDIANA:
-                bonificador = (int) (Math.random() * 4 + 3);
-                resultado = Math.round((tipo.vida * (bonificador * 2.2f) * 100) / 100);
-                return resultado;
+    			return realizarOperacionCalcularVida(tipo,6,3,getStatRaza());
+
             case PESADA:
-                bonificador = (int) (Math.random() * 4 + 3);
-                resultado = Math.round(((tipo.vida * (bonificador * 3) * 0.4f) * 100) / 100);
-                return resultado;
+    			return realizarOperacionCalcularVida(tipo,5,3,getStatRaza());
+
         }
         return 0;
     }
+    /**
+	 * Realiza los calculos para dar la vida final de la unidad
+	 * 
+	 * @param tipo
+	 *            tipo de unidad
+	 * @param max
+	 *            valor máximo de la bonificación por tipo
+	 * @param min
+	 *            valor mínimo de la bonificación por tipo
+	 * @param statRaza
+	 *            bonificación de la raza
+	 */
+	private float realizarOperacionCalcularVida(Tipo tipo, int max ,int min , float statRaza) {
+		float resultado;
+		int bonificador;
+		bonificador = (int) (Math.random() * max + min);
+		resultado = Math.round(((tipo.getVida() *(bonificador * statRaza))*3) * 100) / 100;
+		return resultado;
+	}
 
     /**
      * Método que calcula el ataque de la unidad segun el tipo de unidad y el
@@ -109,20 +132,36 @@ public class Zerg extends Unidad implements Serializable {
         int bonificador;
         switch (tipo) {
             case LIGERA:
-                bonificador = (int) (Math.random() * 3 + 2);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.3f) * 100) / 100);
-                return resultado;
+			return realizarOperacionCalcularAtaque(tipo,3,2,getStatRaza());
             case MEDIANA:
-                bonificador = (int) (Math.random() * 3 + 2);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.2f) * 100) / 100);
-                return resultado;
+    			return realizarOperacionCalcularAtaque(tipo,4,2,getStatRaza());
+
             case PESADA:
-                bonificador = (int) (Math.random() * 4 + 2);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.3f) * 100) / 100);
-                return resultado;
+    			return realizarOperacionCalcularAtaque(tipo,5,3,getStatRaza());
+
         }
         return 0;
     }
+	/**
+	 * Realiza los calculos para designar el ataque de la unidad
+	 * 
+	 * @param tipo
+	 *            tipo de unidad
+	 * @param max
+	 *            valor máximo para la bonificación por tipo
+	 * @param min
+	 *            valor mínimo para la bonificación por tipo
+	 * @param statRaza
+	 *            valor unico de la raza
+	 * @return devuelve la estadistica ataque ya final para asignarse
+	 */
+	private float realizarOperacionCalcularAtaque(Tipo tipo, int max, int min, float statRaza) {
+		float resultado;
+		int bonificador;
+		bonificador = (int) (Math.random() * max + min);
+		resultado = Math.round(((tipo.ataque * (bonificador * statRaza)*3) * 100) / 100);
+		return resultado;
+	}
     /**
      * Ataque avanzado
      * @return devuelve el daño realizado
@@ -132,35 +171,41 @@ public class Zerg extends Unidad implements Serializable {
         int probabilidadDeGolpe;
         switch (getTipo()) {
             case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 3 + 1) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.5f, 3, 2);
             case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 4 + 2) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.5f, 4, 2);
+
             case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 4 + 2) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.5f, 6, 3);
+
             default:
                 danio = 0;
                 break;
         }
         return danio;
     }
+	/**
+	 * Realizael calculo final del daño que realizara
+	 * 
+	 * @param potenciaAtaque
+	 *            cuantificador que aumenta el ataque
+	 * @param max
+	 *            valor máximo de probabilidad por tipo
+	 * @param min
+	 *            valor mímino de probabilidad por tipo
+	 * @return devuelve el daño causado
+	 */
+	private float realizarAtaque(float potenciaAtaque, int max, int min) {
+		float danio;
+		int probabilidadDeGolpe;
+		probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+		if (probabilidadDeGolpe > getTipo().getpGolpe()) {
+		    danio = 0;
+		} else {
+		    danio = Math.round(((getAtaque()* potenciaAtaque/ getStatRaza()) * (int) (Math.random() * max + min) * 100) / 100);
+		}
+		return danio;
+	}
     /**
      * Ataque medio
      * @return devuelve el daño realizado
@@ -168,32 +213,15 @@ public class Zerg extends Unidad implements Serializable {
     @Override
     public float ataqueMedio() {
         float danio;
-        int probabilidadDeGolpe;
         switch (getTipo()) {
             case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 3 + 1) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.3f, 3, 2);
             case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 4 + 2) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.3f, 4, 2);
+
             case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 4 + 2) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.3f, 6, 3);
+
             default:
                 danio = 0;
                 break;
@@ -207,32 +235,15 @@ public class Zerg extends Unidad implements Serializable {
     @Override
     public float ataqueBasico() {
         float danio;
-        int probabilidadDeGolpe;
         switch (getTipo()) {
             case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 3 + 1) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.2f, 3, 2);
             case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 4 + 2) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.2f, 4, 2);
+
             case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.5f) * (int) (Math.random() * 4 + 2) * 100) / 100);
-                }
-                break;
+    			return realizarAtaque(0.2f, 6, 3);
+
             default:
                 danio = 0;
                 break;

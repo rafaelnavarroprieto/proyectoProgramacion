@@ -143,7 +143,7 @@ public abstract class Unidad implements Creacionable, Serializable, Combatible {
      *
      * @param nombre nombre para asignar
      * @throws NombreNoValidoException excepción que salta cuando el nombre no
-     * es valido segun el patrón especifico
+     * es válido segun el patrón especifico
      *
      */
     public void setNombre(String nombre) throws NombreNoValidoException {

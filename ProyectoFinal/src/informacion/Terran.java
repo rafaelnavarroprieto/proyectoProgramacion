@@ -15,223 +15,252 @@ import java.io.Serializable;
  */
 public class Terran extends Unidad implements Serializable {
 
-    /**
-     * Campo que controla el uso de la habilidad
-     */
-    private boolean habUtilizada = false;
+	/**
+	 * Campo que controla el uso de la habilidad
+	 */
+	private boolean habUtilizada = false;
+	/**
+	 * Estadistica unica de la raza
+	 */
+	private static float statRaza = 0.5f;
 
-    /**
-     * Constructor
-     *
-     * @param nombre nombre de la unidad
-     * @param tipo tipo de la unidad
-     * @throws NombreNoValidoException excepción que salta cuando el nombre no
-     * es válido
-     */
-    public Terran(String nombre, Tipo tipo) throws NombreNoValidoException {
-        super(nombre, tipo);
-    }
+	/**
+	 * @return the statRaza
+	 */
+	public float getStatRaza() {
+		return statRaza;
+	}
 
-    /**
-     * Método get del campo habUtilizada
-     *
-     * @return devuelve true si la habilidad ya fue usada o false si la
-     * habilidad no fue usada
-     */
-    public boolean isHabUtilizada() {
-        return habUtilizada;
-    }
+	/**
+	 * Constructor
+	 *
+	 * @param nombre
+	 *            nombre de la unidad
+	 * @param tipo
+	 *            tipo de la unidad
+	 * @throws NombreNoValidoException
+	 *             excepción que salta cuando el nombre no es válido
+	 */
+	public Terran(String nombre, Tipo tipo) throws NombreNoValidoException {
+		super(nombre, tipo);
+	}
 
-    /**
-     * Método set del campo habUtilizada
-     *
-     * @param habUtilizada campo booleano que controla el uso de la habilidad
-     */
-    public void setHabUtilizada(boolean habUtilizada) {
-        this.habUtilizada = habUtilizada;
-    }
+	/**
+	 * Método get del campo habUtilizada
+	 *
+	 * @return devuelve true si la habilidad ya fue usada o false si la
+	 *         habilidad no fue usada
+	 */
+	public boolean isHabUtilizada() {
+		return habUtilizada;
+	}
 
-    /**
-     * Método que ejecuta la habilidad de los terran
-     */
-    public void usarStimpack() {
-        if (!isHabUtilizada()) {
-            super.vida *= 0.5f;
-            super.ataque *= 2;
-        }
-    }
+	/**
+	 * Método set del campo habUtilizada
+	 *
+	 * @param habUtilizada
+	 *            campo booleano que controla el uso de la habilidad
+	 */
+	public void setHabUtilizada(boolean habUtilizada) {
+		this.habUtilizada = habUtilizada;
+	}
 
-    /**
-     * Método que calcula la vida de la unidad en función al tipo de unidad y el
-     * azar
-     *
-     * @param tipo tipo de la unidad
-     * @return devuelve la vida final de la unidad
-     */
-    @Override
-    public float calcularVida(Tipo tipo) {
-        float resultado;
-        int bonificador;
-        switch (tipo) {
-            case LIGERA:
-                bonificador = (int) (Math.random() * 4 + 3);
-                resultado = Math.round((tipo.vida * (bonificador * 2.5f) * 100) / 100);
-                return resultado;
-            case MEDIANA:
-                bonificador = (int) (Math.random() * 6 + 4);
-                resultado = Math.round((((tipo.vida * (bonificador * 2.5f)) * 0.5) * 100) / 100);
-                return resultado;
-            case PESADA:
-                bonificador = (int) (Math.random() * 2 + 1);
-                resultado = Math.round(((tipo.vida * (bonificador * 4) * 0.3f) * 100) / 100);
-                return resultado;
-        }
-        return 0;
-    }
+	/**
+	 * Método que ejecuta la habilidad de los terran
+	 */
+	public void usarStimpack() {
+		if (!isHabUtilizada()) {
+			super.vida *= 0.5f;
+			super.ataque *= 2;
+		}
+	}
 
-    /**
-     * Método que calcula el ataque de la unidad segun el tipo de unidad y el
-     * azar
-     *
-     * @param tipo tipo de unidad
-     * @return devuelve el ataque final de la unidad
-     */
-    @Override
-    public float calcularAtaque(Tipo tipo) {
-        float resultado;
-        int bonificador;
-        switch (tipo) {
-            case LIGERA:
-                bonificador = (int) (Math.random() * 3 + 1);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.5f) * 100) / 100);
-                return resultado;
-            case MEDIANA:
-                bonificador = (int) (Math.random() * 4 + 2);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.3f) * 100) / 100);
-                return resultado;
-            case PESADA:
-                bonificador = (int) (Math.random() * 4 + 3);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.3f) * 100) / 100);
-                return resultado;
-        }
-        return 0;
-    }
-    /**
-     * Ataque avanzado
-     * @return devuelve el daño realizado
-     */
-    @Override
-    public float ataqueAvanzado() {
-        float danio;
-        int probabilidadDeGolpe;
-        switch (getTipo()) {
-            case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.6f) * (int) (Math.random() * 3 + 1) * 100) / 100);
-                }
-                break;
-            case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.6f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.8f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            default:
-                danio = 0;
-                break;
-        }
-        return danio;
-    }
-    /**
-     * Ataque medio
-     * @return devuelve el daño realizado
-     */
-    @Override
-    public float ataqueMedio() {
-        float danio;
-        int probabilidadDeGolpe;
-        switch (getTipo()) {
-            case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.8f) * (int) (Math.random() * 3 + 1) * 100) / 100);
-                }
-                break;
-            case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.8f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.0f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            default:
-                danio = 0;
-                break;
-        }
-        return danio;
-    }
-    /**
-     * Ataque básico
-     * @return devuelve el daño realizado
-     */
-    @Override
-    public float ataqueBasico() {
-        float danio;
-        int probabilidadDeGolpe;
-        switch (getTipo()) {
-            case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.1f) * (int) (Math.random() * 3 + 1) * 100) / 100);
-                }
-                break;
-            case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.1f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.1f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            default:
-                danio = 0;
-                break;
-        }
-        return danio;
-    }
+	/**
+	 * Método que calcula la vida de la unidad en función al tipo de unidad y el
+	 * azar
+	 *
+	 * @param tipo
+	 *            tipo de la unidad
+	 * @return devuelve la vida final de la unidad
+	 */
+	@Override
+	public float calcularVida(Tipo tipo) {
+		float resultado;
+		int bonificador;
+		switch (tipo) {
+		case LIGERA:
+			return realizarOperaciónCalcularVida(tipo, 4, 3, getStatRaza());
+		case MEDIANA:
+			return realizarOperaciónCalcularVida(tipo, 6, 3, getStatRaza());
+		case PESADA:
+			return realizarOperaciónCalcularVida(tipo, 6, 4, getStatRaza());
+
+		}
+		return 0;
+	}
+
+	/**
+	 * Realiza los calculos para dar la vida final de la unidad
+	 * 
+	 * @param tipo
+	 *            tipo de unidad
+	 * @param max
+	 *            valor máximo de la bonificación por tipo
+	 * @param min
+	 *            valor mínimo de la bonificación por tipo
+	 * @param statRaza
+	 *            bonificación de la raza
+	 * @return devuelve la cantidad final de vida que tiene la unidad
+	 */
+	private float realizarOperaciónCalcularVida(Tipo tipo, int max, int min,
+			float statRaza) {
+		float resultado;
+		int bonificador;
+		bonificador = (int) (Math.random() * max + min);
+		resultado = Math.round((tipo.getVida()
+				* (Math.pow(bonificador * getStatRaza(), 2)) * 100) / 100);
+		return resultado;
+	}
+
+	/**
+	 * Método que calcula el ataque de la unidad segun el tipo de unidad y el
+	 * azar
+	 *
+	 * @param tipo
+	 *            tipo de unidad
+	 * @return devuelve el ataque final de la unidad
+	 */
+	@Override
+	public float calcularAtaque(Tipo tipo) {
+		switch (tipo) {
+		case LIGERA:
+			return realizarOperaciónCalcularAtaque(tipo, 3, 1, getStatRaza());
+		case MEDIANA:
+			return realizarOperaciónCalcularAtaque(tipo, 4, 2, getStatRaza());
+		case PESADA:
+			return realizarOperaciónCalcularAtaque(tipo, 5, 2, getStatRaza());
+
+		}
+		return 0;
+	}
+
+	/**
+	 * Realiza los calculos para designar el ataque de la unidad
+	 * 
+	 * @param tipo
+	 *            tipo de unidad
+	 * @param max
+	 *            valor máximo para la bonificación por tipo
+	 * @param min
+	 *            valor mínimo para la bonificación por tipo
+	 * @param statRaza
+	 *            valor unico de la raza
+	 * @return devuelve la estadistica ataque ya final para asignarse
+	 */
+	private float realizarOperaciónCalcularAtaque(Tipo tipo, int max, int min,
+			float statRaza) {
+		float resultado;
+		int bonificador;
+		bonificador = (int) (Math.random() * max + min);
+		resultado = Math.round((tipo.getAtaque()
+				* (Math.pow(bonificador * statRaza, 2) * 0.5f) * 100) / 100);
+		return resultado;
+	}
+
+	/**
+	 * Ataque avanzado
+	 * 
+	 * @return devuelve el daño realizado
+	 */
+	@Override
+	public float ataqueAvanzado() {
+		float danio;
+		switch (getTipo()) {
+		case LIGERA:
+			return realizarAtaque(0.6f, 3, 1);
+
+		case MEDIANA:
+			return realizarAtaque(0.6f, 4, 1);
+
+		case PESADA:
+			return realizarAtaque(0.6f, 5, 1);
+
+		default:
+			return danio = 0;
+
+		}
+
+	}
+
+	/**
+	 * Realizael calculo final del daño que realizara
+	 * 
+	 * @param potenciaAtaque
+	 *            cuantificador que aumenta el ataque
+	 * @param max
+	 *            valor máximo de probabilidad por tipo
+	 * @param min
+	 *            valor mímino de probabilidad por tipo
+	 * @return devuelve el daño causado
+	 */
+	private float realizarAtaque(float potenciaAtaque, int max, int min) {
+		float danio;
+		int probabilidadDeGolpe;
+		probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+		if (probabilidadDeGolpe > getTipo().getpGolpe()) {
+			danio = 0;
+		} else {
+			danio = Math.round((((getAtaque() / getStatRaza() * potenciaAtaque))	* (int) (Math.random() * max + min) * 100) / 100);
+		}
+		return danio;
+	}
+
+	/**
+	 * Ataque medio
+	 * 
+	 * @return devuelve el daño realizado
+	 */
+	@Override
+	public float ataqueMedio() {
+		float danio;
+		switch (getTipo()) {
+		case LIGERA:
+			return realizarAtaque(0.35f, 3, 1);
+
+		case MEDIANA:
+			return realizarAtaque(0.35f, 4, 1);
+
+		case PESADA:
+			return realizarAtaque(0.35f, 5, 1);
+
+		default:
+			return danio = 0;
+
+		}
+	}
+
+	/**
+	 * Ataque básico
+	 * 
+	 * @return devuelve el daño realizado
+	 */
+	@Override
+	public float ataqueBasico() {
+		float danio;
+		switch (getTipo()) {
+		case LIGERA:
+			return realizarAtaque(0.15f, 3, 1);
+
+		case MEDIANA:
+			return realizarAtaque(0.15f, 4, 1);
+
+		case PESADA:
+			return realizarAtaque(0.15f, 5, 1);
+
+		default:
+			return danio = 0;
+
+		}
+	}
 
 }

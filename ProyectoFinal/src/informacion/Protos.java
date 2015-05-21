@@ -27,8 +27,20 @@ public class Protos extends Unidad implements Serializable {
      * Campo que especifica cuanto se regenera de escudo
      */
     private float regeneracionDeEscudo;
-
     /**
+     * estadistica unica de la raza
+     */
+	private static float statRaza = 0.7f;
+	
+	
+    /**
+	 * @return the statRaza
+	 */
+	public float getStatRaza() {
+		return statRaza;
+	}
+
+	/**
      * Método set del campo escudo
      *
      * @param escudo escudo de la unidad
@@ -126,25 +138,34 @@ public class Protos extends Unidad implements Serializable {
      */
     @Override
     public float calcularVida(Tipo tipo) {
-        float resultado;
-        int bonificador;
-        switch (tipo) {
+            switch (tipo) {
             case LIGERA:
-                bonificador = (int) (Math.random() * 4 + 2);
-                resultado = Math.round((tipo.vida * (bonificador * 2) * 100) / 100);
-                return resultado;
+			return realizarOperacionCalculoVida(tipo,4,2,getStatRaza());
             case MEDIANA:
-                bonificador = (int) (Math.random() * 6 + 4);
-                resultado = Math.round((((tipo.vida * (bonificador * 3)) * 0.4f) * 100) / 100);
-                return resultado;
+    			return realizarOperacionCalculoVida(tipo,6,4,getStatRaza());
+
             case PESADA:
-                bonificador = (int) (Math.random() * 10 + 6);
-                resultado = Math.round(((tipo.vida * (bonificador * 5)) * 0.1f * 100) / 100);
-                return resultado;
+    			return realizarOperacionCalculoVida(tipo,10,6,getStatRaza());
+
         }
         return 0;
 
     }
+    /**
+     * Realiza los calculos para dar la vida final de la unidad
+     * @param tipo tipo de unidad
+     * @param max valor máximo de la bonificación por tipo
+     * @param min valor mínimo de la bonificación por tipo
+     * @param statRaza bonificación de la raza
+     * @return devuelve la cantidad total de vida que tendra la unidad
+     */
+	private float realizarOperacionCalculoVida(Tipo tipo, int max, int min,float statRaza) {
+		float resultado;
+		int bonificador;
+		bonificador = (int) (Math.random() * max + min);
+		resultado = Math.round(((tipo.getVida() * (bonificador * statRaza))/0.7 * 100) / 100);
+		return resultado;
+	}
 
     /**
      * Método que calcula el ataque de la unidad segun el tipo de unidad y el
@@ -155,24 +176,31 @@ public class Protos extends Unidad implements Serializable {
      */
     @Override
     public float calcularAtaque(Tipo tipo) {
-        float resultado;
-        int bonificador;
-        switch (tipo) {
+       switch (tipo) {
             case LIGERA:
-                bonificador = (int) (Math.random() * 3 + 2);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.7f) * 100) / 100);
-                return resultado;
+			return realizarOperaciónCalcularAtaque(tipo,3,2,getStatRaza());
             case MEDIANA:
-                bonificador = (int) (Math.random() * 2 + 1);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.7f) * 100) / 100);
-                return resultado;
+            	return realizarOperaciónCalcularAtaque(tipo,4,3,getStatRaza());
             case PESADA:
-                bonificador = (int) (Math.random() * 2 + 1);
-                resultado = Math.round((tipo.ataque * (bonificador * 0.7f) * 100) / 100);
-                return resultado;
+            	return realizarOperaciónCalcularAtaque(tipo,5,3,getStatRaza());
         }
         return 0;
     }
+    /**
+     * Realiza los calculos para designar el ataque de la unidad
+     * @param tipo tipo de unidad
+     * @param max  valor máximo para la bonificación por tipo
+     * @param min  valor mínimo para la bonificación por tipo
+     * @param statRaza valor unico de la raza
+     * @return devuelve la estadistica ataque ya final para asignarse
+     */
+	private float realizarOperaciónCalcularAtaque(Tipo tipo, int max , int min, float statRaza) {
+		float resultado;
+		int bonificador;
+		bonificador = (int) (Math.random() * max + min);
+		resultado = Math.round((tipo.getAtaque() * (bonificador * statRaza) * 100) / 100);
+		return resultado;
+	}
     /**
      * Ataque avanzado
      * @return devuelve el daño realizado
@@ -180,114 +208,85 @@ public class Protos extends Unidad implements Serializable {
     @Override
     public float ataqueAvanzado() {
         float danio;
-        int probabilidadDeGolpe;
         switch (getTipo()) {
             case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.5f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
+            	return danio = realizarAtaque(0.7f,4,1);
+                
             case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.5f) * (int) (Math.random() * 5 + 1) * 100) / 100);
-                }
-                break;
+            	return danio = realizarAtaque(0.7f,5,1);
+                
             case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.6f) * (int) (Math.random() * 5 + 1) * 100) / 100);
-                }
-                break;
+            	return	danio = realizarAtaque(0.7f,7,1);
+               
             default:
-                danio = 0;
-                break;
+              return  danio = 0;
+                
         }
-        return danio;
+   
     }
+    /**
+     * Realizael calculo final del daño que realizara
+     * @param potenciaAtaque cuantificador que aumenta el ataque 
+     * @param max valor máximo de probabilidad por tipo
+     * @param min valor mímino de probabilidad por tipo
+     * @return devuelve el daño causado
+     */
+	private float realizarAtaque(float potenciaAtaque ,int max,int min) {
+		float danio;
+		int probabilidadDeGolpe;
+		probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
+		if (probabilidadDeGolpe > getTipo().getpGolpe()) {
+		    danio = 0;
+		} else {
+		    danio = Math.round(((getAtaque() / getStatRaza()*potenciaAtaque)*0.7 * (int) (Math.random() * max + min) * 100) / 100);
+		}
+		return danio;
+	}
     /**
      * Ataque medio
      * @return devuelve el daño realizado
      */
     @Override
     public float ataqueMedio() {
-float danio;
-        int probabilidadDeGolpe;
-        switch (getTipo()) {
-            case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.7f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.7f) * (int) (Math.random() * 5 + 1) * 100) / 100);
-                }
-                break;
-            case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 0.8f) * (int) (Math.random() * 5 + 1) * 100) / 100);
-                }
-                break;
-            default:
-                danio = 0;
-                break;
-        }
-        return danio;    }
+    	 float danio;
+         switch (getTipo()) {
+             case LIGERA:
+ 			danio = realizarAtaque(0.3f,4,1);
+                 break;
+             case MEDIANA:
+             	danio = realizarAtaque(0.3f,5,1);
+                 break;
+             case PESADA:
+             	danio = realizarAtaque(0.3f,7,1);
+                 break;
+             default:
+                 danio = 0;
+                 break;
+         }
+         return danio;
+         }
     /**
      * Ataque básico
      * @return devuelve el daño realizado
      */
     @Override
     public float ataqueBasico() {
-        float danio;
-        int probabilidadDeGolpe;
-        switch (getTipo()) {
-            case LIGERA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 8) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.0f) * (int) (Math.random() * 4 + 1) * 100) / 100);
-                }
-                break;
-            case MEDIANA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 6) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.0f) * (int) (Math.random() * 5 + 1) * 100) / 100);
-                }
-                break;
-            case PESADA:
-                probabilidadDeGolpe = (int) (Math.random() * 10 + 1);
-                if (probabilidadDeGolpe > 3) {
-                    danio = 0;
-                } else {
-                    danio = Math.round(((getAtaque() / 1.0f) * (int) (Math.random() * 5 + 1) * 100) / 100);
-                }
-                break;
-            default:
-                danio = 0;
-                break;
-        }
-        return danio;
+    	 float danio;
+         switch (getTipo()) {
+             case LIGERA:
+ 			danio = realizarAtaque(0.1f,4,1);
+                 break;
+             case MEDIANA:
+             	danio = realizarAtaque(0.1f,5,1);
+                 break;
+             case PESADA:
+             	danio = realizarAtaque(0.1f,7,1);
+                 break;
+             default:
+                 danio = 0;
+                 break;
+         }
+         return danio;
     }
 
 }
