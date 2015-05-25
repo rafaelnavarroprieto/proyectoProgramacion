@@ -19,6 +19,8 @@ public class AcercaDe extends javax.swing.JDialog {
         initComponents();
         setModal(true);
         setLocationRelativeTo(null);
+        setResizable(false);
+        
 
     }
 

@@ -34,7 +34,7 @@ public class Testeo extends javax.swing.JDialog {
     public Testeo(Unidad unidad, Buscar buscador) {
         super();
         initComponents();
-
+        setResizable(false);
         this.unidad = unidad;
         nombre.setText(unidad.getNombre());
         escudo.setText(comprobarEscudo());

@@ -57,6 +57,7 @@ public class Eliminar extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -102,7 +103,10 @@ public class Eliminar extends javax.swing.JDialog {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 350, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/otros/FondoFinal.png"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 540, 100));
+        jLabel1.setMaximumSize(new java.awt.Dimension(610, 500));
+        jLabel1.setMinimumSize(new java.awt.Dimension(610, 500));
+        jLabel1.setPreferredSize(new java.awt.Dimension(610, 500));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 510, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -119,7 +123,7 @@ public class Eliminar extends javax.swing.JDialog {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                     null, options, options[0]);
             
-            //Acción a realziar segun el boton pulsado
+            //Acciï¿½n a realziar segun el boton pulsado
             
             switch (respuesta) {
                 case JOptionPane.YES_OPTION:

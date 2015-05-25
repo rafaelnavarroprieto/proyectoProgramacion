@@ -20,6 +20,8 @@ public class Ayuda extends javax.swing.JDialog {
         super();
         initComponents();
         setLocationRelativeTo(null);
+        setResizable(false);
+        
 
     }
 

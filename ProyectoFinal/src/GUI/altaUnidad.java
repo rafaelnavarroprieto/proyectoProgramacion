@@ -39,6 +39,7 @@ public class AltaUnidad extends javax.swing.JDialog {
         setTitle(Intermediaria.archivo.getName()+"- A\u00F1adir unidad - 09-may-2015");
         this.ventanaPrincipal = principal;
         setLocationRelativeTo(null);
+        setResizable(false);
 
     }
 
