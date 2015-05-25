@@ -274,34 +274,32 @@ public class Testeo extends javax.swing.JDialog {
     }//GEN-LAST:event_salirActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Float danio;
-        danio = unidad.ataqueBasico();
-        if (danio == 0) {
-            historial.append(unidad.getNombre() + " ha fallado el ataque.\n");
-        } else {
-            historial.append(unidad.getNombre() + " ha realizado un golpe de " + danio + " de daño.\n");
-        }
+        rellenarHistorial(unidad.ataqueBasico());
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         Float danio;
-        danio = unidad.ataqueAvanzado();
-        if (danio == 0) {
-            historial.append(unidad.getNombre() + " ha fallado el ataque.\n");
-        } else {
-            historial.append(unidad.getNombre() + " ha realizado un golpe de " + danio + " de daño.\n");
-        }
+        rellenarHistorial(unidad.ataqueAvanzado());
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         Float danio;
-        danio = unidad.ataqueMedio();
+         rellenarHistorial(unidad.ataqueMedio());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * Escribe en el historial e indica el daño realizado por la unidad
+     * @param golpe daño realizado
+     */
+	private void rellenarHistorial(float golpe) {
+		Float danio;
+        danio = golpe;
         if (danio == 0) {
             historial.append(unidad.getNombre() + " ha fallado el ataque.\n");
         } else {
             historial.append(unidad.getNombre() + " ha realizado un golpe de " + danio + " de daño.\n");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+	}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

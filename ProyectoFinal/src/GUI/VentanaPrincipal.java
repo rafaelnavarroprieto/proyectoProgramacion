@@ -55,6 +55,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         exit = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
+        jMenu1.setMnemonic('c');
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(610, 500));
@@ -483,7 +484,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Operación que se realiza para guardar un archivo ya abierto
      */
     private void guardar() {
-        if (Intermediaria.archivo.getName().equalsIgnoreCase("Sin_titulo")) {
+        if (Intermediaria.archivo.getName().equalsIgnoreCase("Sin_Titulo")) {
             guardarComoFile();
 
         } else {
